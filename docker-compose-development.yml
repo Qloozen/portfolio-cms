@@ -4,7 +4,7 @@ services:
     container_name: strapi-portfolio
     build:
       context: .
-      target: production
+      target: development
     image: mystrapi:latest
     restart: unless-stopped
     environment:
@@ -18,12 +18,22 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
       APP_KEYS: ${APP_KEYS}
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: development
     ports:
       - "1337:1337"
-    pull_policy: build
+    depends_on:
+      - mysql-db
 
-networks:
-  default:
-    name: nginxproxymanager_default
-    external: true
+  mysql-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
