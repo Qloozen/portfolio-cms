@@ -19,6 +19,7 @@ services:
       NODE_ENV: ${NODE_ENV}
     ports:
       - "1337:1337"
+    pull_policy: build
 
 networks:
   default:
