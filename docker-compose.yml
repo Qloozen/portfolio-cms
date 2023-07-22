@@ -21,9 +21,14 @@ services:
       NODE_ENV: ${NODE_ENV}
     ports:
       - "1337:1337"
+    volumes:
+      - portfolio-media:/opt/app/public/uploads
     pull_policy: build
 
 networks:
   default:
     name: nginxproxymanager_default
     external: true
+
+volumes:
+  portfolio-media:
