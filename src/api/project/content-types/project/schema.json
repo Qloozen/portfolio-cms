@@ -54,6 +54,15 @@
     "lastUpdated": {
       "type": "date",
       "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "finished",
+        "inProgress",
+        "maintaining"
+      ],
+      "required": true
     }
   }
 }
